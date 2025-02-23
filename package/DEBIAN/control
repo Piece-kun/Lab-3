@@ -1,0 +1,10 @@
+Package: matrix
+Version: 1.0
+Section: utils
+Priority: optional
+Archirecture: amd64
+Essential: no
+Installed-Size: 40
+Maintainer: o715_13_25
+Architecture: any
+Description: programm for matrix ops. Lab 1
