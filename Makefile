@@ -1,11 +1,19 @@
+   CC = g++
+   CFLAGS = -Wall
+# Проверка наличия компилятора
+   ifeq (, $(shell which $(CC)))
+       $(error "Compiler $(CC) not found! Please install it.")
+   endif
+
+
 all: main.o matrix.o
-	g++ main.o matrix.o -o programm
+	$(CC) main.o matrix.o -o programm $(CFLAGS)
 
 main.o: main.cpp
-	g++ -c main.cpp
+	$(CC) -c main.cpp $(CFLAGS)
 
 marix.o:
-	g++ -c marix.cpp
+	$(CC) -c marix.cpp $(CFLAGS)
 
 clean:	
 	rm -rf *.o
