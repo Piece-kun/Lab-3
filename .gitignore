@@ -1,1 +1,6 @@
+#Object files
 *.o
+#Executable
+*.exe
+*.out
+*.app
