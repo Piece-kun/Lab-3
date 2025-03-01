@@ -1,0 +1,33 @@
+stages:
+  - build
+  - test
+  - pakage
+
+build:
+  stage: build
+  script:
+    - mkdir -p build
+    - cd build
+    - make all
+  artifacts:
+    path:
+      - build/matrix
+
+test:
+  stage: test
+  script:
+    - cd build
+   # - ./ #file test exe
+  dependencies:
+    - build
+
+pakage:
+  stage: package
+  script:
+    - tar -czf matrix.tar.gz -C matrix .
+    - dpkg-deb -- build . ./matrix.deb
+  artifacts:
+    path:
+      - matrix.tar.gz
+  
+
