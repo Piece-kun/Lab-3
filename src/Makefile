@@ -7,7 +7,7 @@
 
 
 all: main.o matrix.o
-	$(CC) main.o matrix.o -o programm $(CFLAGS)
+	$(CC) main.o matrix.o -o ../usr/bin/matrix $(CFLAGS)
 
 main.o: main.cpp
 	$(CC) -c main.cpp $(CFLAGS)
