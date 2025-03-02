@@ -1,19 +1,27 @@
-   CC = g++
-   CFLAGS = -Wall
-# Проверка наличия компилятора
-   ifeq (, $(shell which $(CC)))
-       $(error "Compiler $(CC) not found! Please install it.")
-   endif
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++11
 
+SRC = main.cpp matrix.cpp
+OBJ = $(SRC:.cpp=.o)
+EXEC = programm
 
-all: main.o matrix.o
-	$(CC) main.o matrix.o -o ../usr/bin/matrix $(CFLAGS)
+TEST_SRC = test_matrix.cpp
+TEST_OBJ = test_matrix.o
+TEST_EXEC = test_programm
 
-main.o: main.cpp
-	$(CC) -c main.cpp $(CFLAGS)
+all: $(EXEC)
 
-marix.o:
-	$(CC) -c marix.cpp $(CFLAGS)
+$(EXEC): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(EXEC) $(OBJ)
 
-clean:	
-	rm -rf *.o
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+test: $(TEST_EXEC)
+	./$(TEST_EXEC)
+
+$(TEST_EXEC): $(TEST_OBJ) matrix.o
+	$(CXX) $(CXXFLAGS) -o $(TEST_EXEC) $(TEST_OBJ) matrix.o
+
+clean:
+	rm -f $(OBJ) $(EXEC) $(TEST_OBJ) $(TEST_EXEC)
