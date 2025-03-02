@@ -58,7 +58,7 @@ jobs:
           echo "Architecture: amd64" >> package/DEBIAN/control
           echo "Depends: libc6 (13.0.4-32)" >> package/DEBIAN/control
           mkdir -p package/usr/bin
-          cp usr/bin/programm package/usr/bin/
+          cp usr/bin/matrix package/usr/bin/
           dpkg-deb --build package matrix.deb
 
       - name: Upload Debian package
