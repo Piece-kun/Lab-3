@@ -51,8 +51,8 @@ jobs:
     needs: test  # Запуск после успешного теста
 
     steps:
-      - name: Debug Files
-        run: ls -R
+      - name: Checkout repository
+        uses: actions/checkout@v4
     
       - name: Create Debian package
         run: |
