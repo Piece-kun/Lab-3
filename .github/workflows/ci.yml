@@ -28,6 +28,8 @@ jobs:
         with:
           name: compiled-program
           path: src/programm    # Сохранение бинарника
+      - name: Debug Files
+        run: ls -R
               
   test:
     runs-on: ubuntu-latest
