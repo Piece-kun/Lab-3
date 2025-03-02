@@ -42,3 +42,24 @@ jobs:
 
       - name: Run tests
         run: make -C src test
+
+      - name: Create Debian package
+        run: |
+          mkdir -p package/DEBIAN
+          echo "Package: myprogram" >> package/DEBIAN/control
+          echo "Version: 1.0" >> package/DEBIAN/control
+          echo "Section: base" >> package/DEBIAN/control
+          echo "Priority: optional" >> package/DEBIAN/control
+          echo "Architecture: amd64" >> package/DEBIAN/control
+          echo "Depends: libc6 (>= 2.7)" >> package/DEBIAN/control
+          echo "Maintainer: Your Name <youremail@example.com>" >> package/DEBIAN/control
+          echo "Description: My C++ program" >> package/DEBIAN/control
+          mkdir -p package/usr/bin
+          cp usr/bin/matrix package/usr/bin/
+          dpkg-deb --build package myprogram_1.0_amd64.deb
+
+      - name: Upload Debian package
+        uses: actions/upload-artifact@v4
+        with:
+          name: myprogram-deb-package
+          path: myprogram_1.0_amd64.deb
