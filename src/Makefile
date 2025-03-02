@@ -3,7 +3,7 @@ CXXFLAGS = -Wall -Wextra -std=c++11
 
 SRC = main.cpp matrix.cpp
 OBJ = $(SRC:.cpp=.o)
-EXEC = programm
+EXEC = matrix
 
 TEST_SRC = test_matrix.cpp
 TEST_OBJ = test_matrix.o
