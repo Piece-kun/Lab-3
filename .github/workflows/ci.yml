@@ -28,7 +28,7 @@ jobs:
         with:
           name: compiled-program
           path: usr/bin/matrix  # Сохранение бинарника
-
+              
   test:
     runs-on: ubuntu-latest
     needs: build  # Запуск после успешной сборки
@@ -42,24 +42,27 @@ jobs:
 
       - name: Run tests
         run: make -C src test
+  
+  pack:
+    runs-on: ubuntu-latest
+    needs: test  # Запуск после успешного теста
 
+    steps:
       - name: Create Debian package
         run: |
           mkdir -p package/DEBIAN
-          echo "Package: myprogram" >> package/DEBIAN/control
+          echo "Package: matrix" >> package/DEBIAN/control
           echo "Version: 1.0" >> package/DEBIAN/control
           echo "Section: base" >> package/DEBIAN/control
           echo "Priority: optional" >> package/DEBIAN/control
           echo "Architecture: amd64" >> package/DEBIAN/control
-          echo "Depends: libc6 (>= 2.7)" >> package/DEBIAN/control
-          echo "Maintainer: Your Name <youremail@example.com>" >> package/DEBIAN/control
-          echo "Description: My C++ program" >> package/DEBIAN/control
+          echo "Depends: libc6 (13.0.4-32)" >> package/DEBIAN/control
           mkdir -p package/usr/bin
           cp usr/bin/matrix package/usr/bin/
-          dpkg-deb --build package myprogram_1.0_amd64.deb
+          dpkg-deb --build package matrix.deb
 
       - name: Upload Debian package
         uses: actions/upload-artifact@v4
         with:
-          name: myprogram-deb-package
-          path: myprogram_1.0_amd64.deb
+          name: matrix-deb-package
+          path: matrix.deb
