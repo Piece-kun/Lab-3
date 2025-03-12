@@ -72,7 +72,7 @@ jobs:
           name: matrix-deb-package
           path: matrix.deb
 
-deploy:
+  deploy:
     runs-on: ubuntu-latest
     needs: pack
     steps:
