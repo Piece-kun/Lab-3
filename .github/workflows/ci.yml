@@ -61,7 +61,7 @@ jobs:
           echo "Section: base" >> package/DEBIAN/control
           echo "Priority: optional" >> package/DEBIAN/control
           echo "Architecture: amd64" >> package/DEBIAN/control
-          echo "Depends: libc6 (13.0.4-32)" >> package/DEBIAN/control
+          echo "Depends: libc6 (>= 13.0)" >> package/DEBIAN/control
           mkdir -p package/usr/bin
           cp src/programm package/usr/bin/matrix
           dpkg-deb --build package matrix.deb
