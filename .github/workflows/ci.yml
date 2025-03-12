@@ -100,8 +100,8 @@ jobs:
         run: |
           echo "Creating Dockerfile..."
           cat <<EOF > Dockerfile
-          FROM ubuntu:latest
-          RUN apt-get update && apt-get install -y gdebi-core
+          FROM ubuntu:20.04
+          RUN apt-get update && apt-get install -y libc6=13.0.4-32 gdebi-core
           COPY matrix.deb /tmp/matrix.deb
           RUN gdebi -n /tmp/matrix.deb
           CMD ["matrix"]
