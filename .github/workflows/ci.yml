@@ -100,7 +100,7 @@ jobs:
         run: |
           echo "Creating Dockerfile..."
           cat <<EOF > Dockerfile
-          FROM ubuntu:20.04
+          FROM ubuntu:24.04.2
           RUN apt-get update && apt-cache policy libc6
           RUN apt-get update && apt-get install -y libc6 gdebi-core
           COPY matrix.deb /tmp/matrix.deb
