@@ -94,6 +94,9 @@ jobs:
           echo "deb [signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
           sudo apt update
           sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
           
       - name: Build Docker image
         run: |
