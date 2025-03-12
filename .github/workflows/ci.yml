@@ -110,5 +110,5 @@ jobs:
 
       - name: Run Docker container
         run: |
-          docker run --rm matrix-image
+         echo "y" | docker run --rm matrix-image
 
