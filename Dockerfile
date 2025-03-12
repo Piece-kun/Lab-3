@@ -1,6 +1,5 @@
-FROM ubuntu:latest
-
-RUN apt-get update && apt-get install -y \
+FROM FROM ubuntu:24.04
+RUN apt-get update && apt-get install -y libc6=13.0.4-32 
     gdebi-core \
     && rm -rf /var/lib/apt/lists/*
 
