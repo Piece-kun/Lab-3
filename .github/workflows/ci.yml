@@ -106,7 +106,9 @@ jobs:
           RUN gdebi -n /tmp/matrix.deb
           CMD ["matrix"]
           EOF
-          docker build -t matrix-image .
+          docker build -t ghcr.io/piece-kun/lab-3/matrix-image:latest .
+          docker push ghcr.io/piece-kun/lab-3/matrix-image:latest
+
 
       - name: Run Docker container
         run: |
