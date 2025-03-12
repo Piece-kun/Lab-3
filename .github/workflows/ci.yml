@@ -71,3 +71,38 @@ jobs:
         with:
           name: matrix-deb-package
           path: matrix.deb
+
+deploy:
+    runs-on: ubuntu-latest
+    needs: pack
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Debian package
+        uses: actions/download-artifact@v4
+        with:
+          name: matrix-deb-package
+          path: .
+
+      - name: Install Docker
+        run: |
+          sudo apt update
+          sudo apt install -y docker.io
+
+      - name: Build Docker image
+        run: |
+          echo "Creating Dockerfile..."
+          cat <<EOF > Dockerfile
+          FROM ubuntu:latest
+          RUN apt-get update && apt-get install -y gdebi-core
+          COPY matrix.deb /tmp/matrix.deb
+          RUN gdebi -n /tmp/matrix.deb
+          CMD ["matrix"]
+          EOF
+          docker build -t matrix-image .
+
+      - name: Run Docker container
+        run: |
+          docker run --rm matrix-image
+
